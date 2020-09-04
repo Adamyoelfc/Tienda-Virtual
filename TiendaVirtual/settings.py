@@ -25,7 +25,7 @@ SECRET_KEY = ')kw)_&lstgshu5=pkg_mb#*wdklcp65=#==^m!wz)dduh2a7_z'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['tuextravio.herokuapp.com', 'localhost']
 
 
 # Application definition
