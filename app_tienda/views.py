@@ -4,7 +4,7 @@ from django.contrib.auth import login, logout,authenticate
 from .models import *
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import HttpResponseRedirect
-from app_tienda.forms import LoginForms, RegisterForm, Departamentos_filter
+from app_tienda.forms import LoginForms, RegisterForm
 from django.shortcuts import HttpResponse
 
 # Create your views here.
