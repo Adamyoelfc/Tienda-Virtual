@@ -1,0 +1,109 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{% static 'app_tienda/bootstrap/css/bootstrap.min.css' %}">
+{#    <link rel="stylesheet" href="{% static 'app_tienda/style.css' %}">#}
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<header>
+<!-- Barra de navegacion-->
+<div class="navbar  navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/">Tu extravio</a>
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Departamentos
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="{% url 'cat_alim_ref' %}">Alimentos Refrijerados</a>
+          <a class="dropdown-item" href="{% url 'cat_alim' %}">Alimentos</a>
+          <a class="dropdown-item" href="{% url 'cat_utiles_hog' %}">Utiles del hogar</a>
+        </div>
+      </li>
+    </ul>
+
+        <a href="{% url 'carrito' %}" style="margin-right: 4rem "><img src="{% static 'app_tienda/image/shop.jpg' %}" alt="shop"></a>
+      {% if user.is_authenticated %}
+          <a href="{% url 'log_out' %}" style="padding-right: 2rem"><button type="button" class="btn btn-primary">LogOut</button></a>
+      {% else %}
+        <a href="{% url 'login_views' %}" style="padding-right: 2rem"><button type="button" class="btn btn-primary">LogIn</button></a>
+        <a href="{% url 'register_views' %}" style="padding-right: 2rem"><button type="button" class="btn btn-secondary">Registro</button></a>
+      {% endif %}
+    <form action="/" method="get" class="form-inline my-2 my-lg-0">
+      <input id="q" name="q" value="{{ req.GET.q }}" class="form-control mr-sm-2" type="search" placeholder="Buscar..." aria-label="Search">
+      <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</div>
+</header>
+
+<body>
+<!-- Carousel -->
+<div id="carousel" class="carousel slide bg-danger" data-ride="carousel" data-interval="4000" >
+        <ol class="carousel-indicators">
+            <li data-slide-to="0" class="active"></li>
+            <li data-slide-to="1" ></li>
+            <li data-slide-to="2" ></li>
+        </ol>
+        <div class="carousel-inner" style="text-align: center; max-width: border-box; max-height: 15rem ">
+            <div class="carousel-item active">
+                <img src="{% static 'app_tienda/image/IMG_0115.jpg' %}" alt="image">
+            </div>
+            <div class="carousel-item">
+                <img src="{% static 'app_tienda/image/IMG_0108.jpg' %}" alt="image">
+            </div>
+            <div class="carousel-item">
+                <img src="{% static 'app_tienda/image/IMG_0101.jpg' %}" alt="image">
+            </div>
+        </div>
+    </div>
+{% block content %}
+
+{% endblock %}
+
+<!-- Footer-->
+<div class="footer">
+    <div class="jumbotron jumbotron-fluid " style="margin-bottom: 0px">
+        <div class="row " style="margin-left: 20px ; margin-right: 20px">
+            <div class=" container col-12 col-md-6">
+                <h5>Contactanos:</h5>
+                <ul class="list-group">
+                    <li class="list-item">
+                        <p>Fijo: 78241182</p>
+                    </li>
+                    <li class="list-item">
+                        <p>Correo Electronico: tuextravio@nollega.cu</p>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="container bg-light col-12 col-md-6">
+
+                <p>Nuestra tienda online le permite realizar compras de alimentos, bebidas, electrodomesticos,
+                    productos de aseo y limpieza, regalos, jugyetes, computadoras y <strong>mucho mas</strong>.
+                    <br>Para su compra y envios a familiares y amigos en Cuba, TuExtravio</p>
+                <hr>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{% static 'app_tienda/bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'app_tienda/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'app_tienda/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+</body>
+</html>
+

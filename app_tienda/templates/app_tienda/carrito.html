@@ -1,0 +1,48 @@
+{% extends 'app_tienda/base.html' %}
+{% block title %}
+    Carrito
+{% endblock %}
+{% block content %}
+
+    <div class="container">
+        {% if productos %}
+        <div class="row">
+            <hr>
+            <h1 class="display-4" style="margin-left: 10px">Usted tiene actualmente en su carrito {{ cant }} productos</h1>
+            <div class="container col-12 col-md-10">
+                <hr>
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Producto</th>
+                            <th scope="col">Precio</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for producto in productos %}
+                            <tr>
+                                <td>{{ producto.title }}</td>
+                                <td>{{ producto.precio }}$</td>
+                            </tr>
+                        {% endfor %}
+                            <tr>
+                                <td><h3>Total</h3></td>
+                                <td><h3> {{ total }} $</h3></td>
+                            </tr>
+                    </tbody>
+                </table>
+                    <div class="container">
+                        <a href="{% url 'vac_carr' %}" class="float-right"><button class="btn btn-default btn-lg">Vaciar carro</button></a>
+                            <button class="btn btn-success btn-lg float-right">Pagar</button>
+                    </div>
+                <hr>
+            </div>
+        {% else %}
+            <hr>
+            <h1 class="display-4">Usted no ha agregado ningun producto al carro de compra aún</h1>
+            <hr>
+        {% endif %}
+        </div>
+    </div>
+{% endblock %}
+

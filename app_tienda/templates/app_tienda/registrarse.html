@@ -1,0 +1,26 @@
+{% extends 'app_tienda/base.html' %}
+{% block title %}
+    Registrarse
+{% endblock %}
+
+{% block content %}
+    <div class="container" style="padding-top: 5rem; padding-bottom: 5rem">
+        <div class="row">
+            <div class="card col-8 col-md-6 col-lg-6 mx-auto">
+                <div class="card-header">
+                    <p class="display-4">Registate</p>
+                </div>
+                <form  action="" method="post">{% csrf_token %}
+                    <div class="card-body">
+
+                            {{ form }}<br>
+                    </div>
+                     <div class="card-footer">
+                         <button type="submit" class="btn btn-primary">Registrar</button>
+                         <button type="reset" class="btn btn-secondary">Cancel</button>
+                     </div>
+                 </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

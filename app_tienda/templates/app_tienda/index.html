@@ -1,0 +1,115 @@
+{% extends 'app_tienda/base.html' %}
+{% load static %}
+{% block title %}
+    Home
+{% endblock %}
+{% block content %}
+
+    <!-- Productos -->
+    <div class="album py-5">
+        <div class="container">
+            <div class="row" >
+            {% for producto in productos  %}
+{#                <div class="col-10 col-lg-5 col-lg-4 mx-auto">#}
+                <div class="col-10 col-md-6 col-lg-4 mx-auto">
+                    <div class="card mb-4 shadow-sm" >
+                        <img class="card-img-top" src="{{ producto.image_thumbnail.url }}" alt="img">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ producto.title }}</h5>
+                            <p class="card-text">{{ producto.descripcion|truncatechars:50 }}</p>
+
+                            <div class="card-footer row" role="group">
+                                <div class="col-6 mx-auto"><button type="button" data-toggle="modal" data-target="#modal_ver{{ producto.title }}" class="btn btn-secondary btn-lg">Ver</button></div>
+
+                            {% if user.is_authenticated %}
+                                    <div class="text-right mx-auto col-6"><button type="button"  data-toggle="modal" data-target="#modal_comprar{{ producto.title }}" class="btn btn-success btn-sm"><i class="icon-bar"><h5>{{ producto.precio }} $</h5>Comprar</i></button></div>
+                            {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                 </div>
+                 <!-- Modals-->
+                <div  class="modal fade col-11 col-md-6 " id="modal_ver{{ producto.title }}" tabindex="-1" role="dialog" aria-labelledby="modal_ver" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="modal_ver">{{ producto.title }}</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="card-body">
+                                                    <img class="card-img-top" src="{{ producto.image.url }}" alt="img" style="max-width: 30rem"> <br><br>
+                                                    {{ producto.descripcion }}
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                {% if user.is_authenticated %}
+                                                    <button type="button"  data-toggle="modal" data-target="#modal_comprar{{ producto.title }}" class="btn btn-success btn-sm"><i class="icon-bar"><h5>{{ producto.precio }} $</h5>Comprar</i></button>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                <div class="modal fade" id="modal_comprar{{ producto.title }}" tabindex="-1" role="dialog" aria-labelledby="modal_comprar" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modal_comprar">Agregar al carrito</h5>
+                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                     <span aria-hidden="true">&times;</span>
+                                 </button>
+                            </div>
+                            <!--body cantidad -->
+                            <!--
+                            <div class="modal-body">
+                                <h3>Que cantidad del producto <br>"{{ producto.title }}" desea comprar por {{ producto.precio }} $?</h3>
+                                <div class="form-group">
+                                    <select class="form-control" name="cantidad" id="cant">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </select>
+                                 </div>
+                            </div>
+                               -->
+                            <div class="modal-body">
+                                <h5>Desea comprar el producto "{{ producto.title }}" por {{ producto.precio }} $?</h5>
+                            </div>
+
+                            <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                    <a href="{% url  'carr_add' producto.id %}"><button id="comprado" data-toggle="modal" data-target="#comprado{{ producto.title }}" name="comprado" type="submit" class="btn btn-success">Comprar</button></a>
+                             </div>
+                        </div>
+                    </div>
+
+                    <!-- modal el productu fue agregado al carrito
+                    <div class="modal fade" id="comprado{{ producto.title }}" tabindex="-1" role="dialog" aria-labelledby="comprado" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h3 class="modal-title">Operacion exitosa</h3>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <h4 >Se ha agregado al carrito correctamente</h4>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" data-dismiss="modal" aria-label="Aceptar" class="btn btn-success">Aceptar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                     -->
+                </div>
+            {% endfor %}
+        </div>
+        </div>
+    </div>
+
+{% endblock %}

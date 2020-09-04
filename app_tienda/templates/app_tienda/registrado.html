@@ -1,0 +1,12 @@
+{% extends 'app_tienda/base.html' %}
+{% block title %}
+    Registrado
+{% endblock %}
+
+{% block content %}
+    <div class="jumbotron jumbotron-fluid text-center">
+        <h5 class="display-4">Gracias por registrarse</h5>
+        <br>
+        <a href="{% url 'login_views' %}"><button class="btn btn-primary">Iniciar seccion</button></a>
+    </div>
+{% endblock %}
