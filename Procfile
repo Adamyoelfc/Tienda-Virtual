@@ -1,1 +1,1 @@
-web gunicorn TiendaVirtual.wsgi --log-file -
+web: gunicorn TiendaVirtual.wsgi --log-file -
